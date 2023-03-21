@@ -29,32 +29,40 @@ public class Runner {
 		c1.setId(1);
 		vehicles.add(c1);
 		try {
-			System.out.println(findById(vehicles));
+			findById(vehicles);
 		} catch (VehicleNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("vehicle not found with this id");
 		}
 	}
 	
-	public static Vehicle findById(ArrayList<Vehicle> vehicles) throws VehicleNotFoundException {
-
+	public static void findById(ArrayList<Vehicle> vehicles) throws VehicleNotFoundException {
+		
 		try(Scanner scan = new Scanner(System.in);){
+			boolean idFound = false;
 			
 			System.out.println("Enter id: ");
 			int id = scan.nextInt();
-			
-			for (Vehicle vehicle:vehicles) {
-				if (vehicle.getId()==id) {
-					return vehicle;
+			while (true) {
+				for (Vehicle vehicle:vehicles) {
+					if (vehicle.getId()==id) {
+						System.out.println(vehicle);
+						idFound = true;
+						break;
+					}	
+					else 
+						idFound = false;
 				}
-					
+				if (idFound == false ) {
+					System.out.println("Id not found. Try again");
+				}
+				System.out.println("Enter id: ");
+				id = scan.nextInt();
+				
 			}
-
-			throw new VehicleNotFoundException();
 			
-		}
+			
+		}	
 		
 	}
-
-
 }
